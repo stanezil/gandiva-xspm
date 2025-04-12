@@ -100,25 +100,34 @@ Ensure your kubeconfig is properly set up to access your Kubernetes clusters.
 - [Frontend Documentation](./frontend/README.md)
 - [Authentication Guide](./frontend/README-AUTH.md)
 
-![image](https://github.com/user-attachments/assets/e636a9d2-46aa-476b-92b6-2272378507fb)
+![image](https://github.com/user-attachments/assets/e50cb10a-cd1b-4a33-92a9-e712f59e0023)
 
-![image](https://github.com/user-attachments/assets/f13f6ec5-dd32-4667-850e-a6c791e50af7)
+![image](https://github.com/user-attachments/assets/f901f0f4-a2de-4fd9-af68-e0086ff90706)
 
-![image](https://github.com/user-attachments/assets/ef22557e-018d-4ab6-a4d2-1a45a14f4b43)
+![image](https://github.com/user-attachments/assets/884b4146-34b2-40aa-8708-4a225fbf34d8)
 
-![image](https://github.com/user-attachments/assets/9273ba0d-d202-4eb4-8d56-3f57a845bcc6)
+![image](https://github.com/user-attachments/assets/a0142b37-e3af-494d-9282-82c76f4ae322)
 
-![image](https://github.com/user-attachments/assets/0013c9fb-edb6-4abc-ab8d-c9c1e5881a61)
+![image](https://github.com/user-attachments/assets/75c05854-59e3-4a70-8563-8df04c8780bf)
 
-![image](https://github.com/user-attachments/assets/fdb15953-5b67-437b-a286-f02e37a07f15)
+![image](https://github.com/user-attachments/assets/1ec2870a-93c9-4a4d-947d-fb15f230e842)
 
-![image](https://github.com/user-attachments/assets/2d0cc619-ec66-4ea2-8be6-87a86e1e85e6)
+![image](https://github.com/user-attachments/assets/4d85b8fa-f18c-458a-9797-aca8f55c2034)
 
-![image](https://github.com/user-attachments/assets/41798c86-9a46-41c4-9fb9-a5b6d11389f3)
+![image](https://github.com/user-attachments/assets/b07d5166-3dab-489c-9424-62bff6093cef)
 
-![image](https://github.com/user-attachments/assets/ebcef7bc-58ee-4b7d-949b-7543c6d46fae)
+![image](https://github.com/user-attachments/assets/e2fdd62e-a55a-4447-b477-3efd3606103f)
 
-![image](https://github.com/user-attachments/assets/eb5063ef-53aa-491d-a840-80b5a47bddb3)
+![image](https://github.com/user-attachments/assets/06275a8f-c6c3-4b75-af4e-4951a3fbea82)
+
+
+
+
+
+
+
+
+
 
 
 
