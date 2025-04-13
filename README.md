@@ -51,7 +51,7 @@ Gandiva consists of three main components:
 - **Frontend**: React, TypeScript, Tailwind CSS, Shadcn UI, React Flow
 - **Backend**: Python, Flask, Flask-RESTful, JWT Authentication
 - **Databases**: MongoDB for application data, Neo4j for graph visualization
-- **Scanning**: Steampipe for cloud resource scanning
+- **Scanning**: Steampipe for cloud resource scanning,checkov,trivy,custom scanners
 - **Deployment**: Docker containers, can be deployed on Kubernetes
 
 ## Project Structure
