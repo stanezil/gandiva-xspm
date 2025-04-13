@@ -20,8 +20,10 @@ The application can be containerized using Docker: Simply clone this repository 
 
 2. Run the containers:
    ```
+   PLEASE MAKE SURE YOU HAVE ALL THE PREREQUISITES SETUP AND MAKE SURE THAT YOUR PATH TO THE AWS CREDS AND KUBECONFIG CREDS MATCH THAT WHAT IS PRESENT IN THE "# Start Backend with AWS & Kubeconfig Volumes SECTION OF THE SHELL SCRIPT"
    chmod +x start_gandiva.sh
    ./start_gandiva.sh
+   Please follow the instructions that come up after you run this shell script( it talks about how you can initiate the scans and set everything up)
    ```
 
 ## Key Features
