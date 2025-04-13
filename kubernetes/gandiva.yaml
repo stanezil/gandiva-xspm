@@ -1,0 +1,206 @@
+---
+# AWS Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aws-credentials
+stringData:
+  credentials: |
+    [default]
+    aws_access_key_id = xxx
+    aws_secret_access_key = xxx
+  config: |
+    [default]
+    region = ap-southeast-1
+
+---
+# MongoDB
+apiVersion: v1
+kind: Service
+metadata:
+  name: gandiva-mongo
+spec:
+  selector:
+    app: gandiva-mongo
+  ports:
+    - port: 27017
+      targetPort: 27017
+      name: mongo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gandiva-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gandiva-mongo
+  template:
+    metadata:
+      labels:
+        app: gandiva-mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+
+---
+# Frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: gandiva-frontend
+spec:
+  selector:
+    app: gandiva-frontend
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gandiva-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gandiva-frontend
+  template:
+    metadata:
+      labels:
+        app: gandiva-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: stanhoe/gandiva-frontend
+          ports:
+            - containerPort: 8080
+
+---
+# Backend
+apiVersion: v1
+kind: Service
+metadata:
+  name: gandiva-backend
+spec:
+  selector:
+    app: gandiva-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+      name: http
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gandiva-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gandiva-backend
+  template:
+    metadata:
+      labels:
+        app: gandiva-backend
+    spec:
+      containers:
+        - name: backend
+          image: stanhoe/gandiva-backend
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              value: mongodb://gandiva-mongo:27017/
+          volumeMounts:
+            - name: aws-creds
+              mountPath: /home/appuser/.aws
+              readOnly: true
+            - name: aws-creds
+              mountPath: /root/.aws
+              readOnly: true
+            - name: kube-config
+              mountPath: /home/appuser/.kube
+              readOnly: true
+            - name: kube-config-root
+              mountPath: /root/.kube
+              readOnly: true
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: aws-creds
+          projected:
+            sources:
+              - secret:
+                  name: aws-credentials
+                  items:
+                    - key: credentials
+                      path: credentials
+                    - key: config
+                      path: config
+        - name: kube-config
+          hostPath:
+            path: /home/your-user/.kube
+        - name: kube-config-root
+          hostPath:
+            path: /home/your-user/.kube
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+
+---
+# Neo4j
+apiVersion: v1
+kind: Service
+metadata:
+  name: gandiva-neo4j
+spec:
+  selector:
+    app: gandiva-neo4j
+  ports:
+    - port: 7474
+      targetPort: 7474
+      name: http
+    - port: 7687
+      targetPort: 7687
+      name: bolt
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gandiva-neo4j
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gandiva-neo4j
+  template:
+    metadata:
+      labels:
+        app: gandiva-neo4j
+    spec:
+      containers:
+        - name: neo4j
+          image: neo4j
+          ports:
+            - containerPort: 7474
+            - containerPort: 7687
+          env:
+            - name: NEO4J_AUTH
+              value: neo4j/password
+            - name: NEO4JLABS_PLUGINS
+              value: '["apoc"]'
+          volumeMounts:
+            - name: neo4j-data
+              mountPath: /data
+      volumes:
+        - name: neo4j-data
+          emptyDir: {}
